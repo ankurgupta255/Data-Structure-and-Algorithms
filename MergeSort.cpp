@@ -1,26 +1,66 @@
-//This is the code for the Merging Sort function of two Sorted Arrays sorted in ascending oder toan array containing the elements of both the arrays in ascending order
-void MergeSort(int a[100],int m,int b[100],int n){	//This is the function definition with parametes including the two arrays to be merged sort in ascending order
-	int c[200];
-	int k;
-	for(int i=0;int j=0;i<m;j<n;k++){
-		if(a[i]<b[j]){		//if the element of the 1st array is less than the element of the 2nd array then send the element to a separate array
-			c[k]=a[i];
-			i++; 			//increment the array by one 
+#include<iostream>
+using namespace std;
+void merge(int a[],int n){
+		int left[100];
+		int right[100];
+		int s1=0;
+		int s2=0;
+		for(int i=0;i<n/2;i++){
+			left[i]=a[i];
+			s1++;
 		}
-		else{
-			c[k]=b[j];		//else the element of the 2nd array is to be send to the new array
-			j++;
+		for(int i=n/2,q=0;i<n;i++,q++){
+			right[q]=a[i];
+			s2++;
+		}	
+		int result[200];
+		int l=0;
+		int r=0;
+		int x=0;
+		while(l<s1 && r<s2){
+			if(left[l]<right[r]){
+				result[x]=left[l];
+				x++;
+				l++;
+			}
+			else{
+				result[x]=right[r];
+				x++;
+				r++;
+			}
+		}
+		while(l<s1){
+			result[x]=left[l];
+			x++;
+			l++;
+		}
+		while(r<s2){
+			result[x]=right[r];
+			x++;
+			r++;
+		}
+		for(int i=0;i<s1+s2;i++){
+			cout<<result[i]<<" ";
 		}
 	}
-	while(i<m){
-		c[k]=a[i];
-		i++;
-		k++;
+
+void MergeSort(int a[]){
+	int n=0;
+	cout<<"Enter the size of array: ";
+	cin>>n;
+	cout<<"Enter the array Elements: ";
+	for(int i=0;i<n;i++){
+		cin>>a[i];
 	}
-	while(j<n){
-		c[k]=b[j];
-		j++;
-		k++;
+	if(n==1){
+		cout<<a[0];
+	}
+	else{
+		 merge(a,n);
 	}
 }
 
+int main(){
+	int a[2100];
+	MergeSort(a);
+}
