@@ -1,50 +1,55 @@
 #include<iostream>
 using namespace std;
-void merge(int a[],int n){
-		int left[100];
-		int right[100];
+int  Merge(int a[],int l, int m, int r){
+		int left[100]={};
+		int right[100]={};
 		int s1=0;
 		int s2=0;
-		for(int i=0;i<n/2;i++){
-			left[i]=a[i];
+		for(int i=l;i<=m;i++){
+			left[s1]=a[i];
 			s1++;
 		}
-		for(int i=n/2,q=0;i<n;i++,q++){
-			right[q]=a[i];
+		for(int j=m+1;j<=r;j++){
+			right[s2]=a[j];
 			s2++;
-		}	
-		int result[200];
-		int l=0;
-		int r=0;
-		int x=0;
-		while(l<s1 && r<s2){
-			if(left[l]<right[r]){
-				result[x]=left[l];
+		}
+		int le=0;
+		int ri=0;
+		int x=l;
+		while(le<s1 && ri<s2){
+			if(left[le]<right[ri]){
+				a[x]=left[le];
 				x++;
-				l++;
+				le++;
 			}
 			else{
-				result[x]=right[r];
+				a[x]=right[ri];
 				x++;
-				r++;
+				ri++;
 			}
 		}
-		while(l<s1){
-			result[x]=left[l];
+		while(le<s1){
+			a[x]=left[le];
 			x++;
-			l++;
+			le++;
 		}
-		while(r<s2){
-			result[x]=right[r];
+		while(ri<s2){
+			a[x]=right[ri];
 			x++;
-			r++;
-		}
-		for(int i=0;i<s1+s2;i++){
-			cout<<result[i]<<" ";
+			ri++;
 		}
 	}
-
-void MergeSort(int a[]){
+	void MergeSort(int a[],int l, int r){
+		if(l<r){
+			int m=(l+r)/2;
+			MergeSort(a,l,m);
+			MergeSort(a,m+1,r);
+			Merge(a,l,m,r);
+		}	
+	}
+	
+int main(){
+	int a[200]={};
 	int n=0;
 	cout<<"Enter the size of array: ";
 	cin>>n;
@@ -52,15 +57,8 @@ void MergeSort(int a[]){
 	for(int i=0;i<n;i++){
 		cin>>a[i];
 	}
-	if(n==1){
-		cout<<a[0];
+	MergeSort(a,0,n-1);
+	for(int i=0;i<n;i++){
+		cout<<a[i]<<endl;
 	}
-	else{
-		 merge(a,n);
-	}
-}
-
-int main(){
-	int a[2100];
-	MergeSort(a);
 }

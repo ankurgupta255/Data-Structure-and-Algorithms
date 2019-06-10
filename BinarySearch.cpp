@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 int main(){
-	int a[100];
+	int a[100]={};
 	int n=0;
 	cout<<"Enter the size of array: ";
 	cin>>n;

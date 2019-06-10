@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-void BubbleSort(int a[]){
+void SelectionSort(int a[]){
 	int n=0;
 	cout<<"Enter the size of array: ";
 	cin>>n;
@@ -9,18 +9,24 @@ void BubbleSort(int a[]){
 		cin>>a[i];
 	}
 	for(int i=0;i<n;i++){
-		for(int j=0;j<n-1-i;j++){
-			if(a[j]>a[j+1]){
-				swap(a[j],a[j+1]);
+		int index=0;
+		int min=a[i];
+		for(int j=i;j<n;j++){
+			if(a[j]<=min){
+				min=a[j];
+				index=j;
 			}
 		}
+		int temp=a[i];
+		a[i]=min;
+		a[index]=temp;
 	}
 	for(int i=0;i<n;i++){
-		cout<<a[i]<<endl;
+		cout<<a[i]<<", ";
 	}
 }
 int main(){
 	int a[100];
-	BubbleSort(a);
+	SelectionSort(a);
 	
 }
