@@ -1,8 +1,9 @@
 #include<iostream>
+#include<climits>
 using namespace std;
 int kadane(int a[],int n){
 	int curr=0;
-	int global=0;
+	int global=INT_MIN;
 	for(int i=0;i<n;i++){
 		curr+=a[i];
 //		for(int j=0;j<=i;j++){
